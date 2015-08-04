@@ -1,0 +1,17 @@
+.edit-toolbar {
+	position: absolute;
+}
+.eg-editable {
+	position: relative;
+}
+.js-cancelled {
+	opacity: .2;
+}
+.js-cancelled .js-cancel {
+	opacity: 1 !important;
+}
+.js-delete-toolbar {
+	position: absolute;
+	top: 15px;
+	left: -35px;
+}
