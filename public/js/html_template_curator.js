@@ -29,6 +29,16 @@
     $.fn.templateEditor = function(templateContentSelector, selectedTemplate, templateContainerSelector) {
         var self = this;
 
+        //Append the approriate styles
+        $('head').append('<link rel="stylesheet" href="/packages/despark/html-template-curator/js/vendor/bootstrap/dist/css/bootstrap.min.css" type="text/css" />');
+        $('head').append('<link rel="stylesheet" href="/packages/despark/html-template-curator/css/vendor/fontawesome/css/font-awesome.min.css" type="text/css" />');
+        $('head').append('<link rel="stylesheet" href="//code.jquery.com/ui/1.11.4/themes/smoothness/jquery-ui.css" type="text/css" />');
+        $('head').append('<link rel="stylesheet" href="/packages/despark/html-template-curator/css/vendor/bootstrap-responsive.css" type="text/css" />');
+        $('head').append('<link rel="stylesheet" href="/packages/despark/html-template-curator/css/vendor/bootstrap-tokenizer.css" type="text/css" />');
+        $('head').append('<link rel="stylesheet" href="/packages/despark/html-template-curator/css/vendor/imgareaselect-default.css" type="text/css" />');
+        $('head').append('<link rel="stylesheet" href="/packages/despark/html-template-curator/css/vendor/redactor/redactor.css" type="text/css" />');
+        $('head').append('<link rel="stylesheet" href="/packages/despark/html-template-curator/css/html_template_curator.css" type="text/css" />');
+
         var editToolbarHtml =
             '<div class="btn-group edit-toolbar" role="group" aria-label="Edit">'
                 +'<button type="button" class="btn btn-primary js-edit">Edit</button>'
