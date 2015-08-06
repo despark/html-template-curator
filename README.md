@@ -43,5 +43,5 @@ The idea is that when coding your HTML templates you add the `eg-editable` class
 9. Add the available templates in the following config: * config/packages/despark/html-template-curator/config.php* under the `templates` key of the config array. As key for each element of the array put the name of the folder in which the template is stored  and as a value put the display name you want to appear in the select field.
 10. After you are done navigate the page you just created and start editing your templates.
 
-In the Package views you will find a folder called **examples** you can see a sample implementation of the editor there. 
+In the package views you will find a folder called **examples**, which contains sample implementations of the editor. 
 
