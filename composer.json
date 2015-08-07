@@ -3,7 +3,7 @@
     "description": "Laravel 4 package, which enables you to manage complicated HTML templates, preserving the design integrity.",
 	"keywords": ["laravel","rich", "text", "editor", "wysiwyg", "despark"],
 	"license": "MIT",
-	"type": "plugin"
+	"type": "plugin",
     "authors": [
         {
             "name": "Stoyan Dipchikov",
