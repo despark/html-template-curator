@@ -7,7 +7,7 @@ return [
         'book'      => 'Book review',
     ],
 
-    'templates_location' => public_path().'/article_templates/',
+    'templates_location' => public_path().'/templates/',
 
     'upload_directory_name' => 'upload',
 
