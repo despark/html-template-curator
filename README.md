@@ -50,3 +50,4 @@ The idea is that when coding your HTML templates you add the `eg-editable` class
 
 In the package views you will find a folder called **examples**, which contains sample implementations of the editor. 
 
+* P.S.: Keep in mind that this is still work in progress, so there might some small issues for resolving, but I count on you and your great pull-requests to make it a great plugin*
