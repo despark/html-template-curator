@@ -10,10 +10,10 @@ The idea is that when coding your HTML templates you add the `eg-editable` class
 	"despark/html-template-curator": "1.*"
 	```
 2. Run composer update
-3. Put your amazing HTML templates (which include the required `eg-editable` on all the editable sections) in a new folder called *templates* in your public directory.
-4. Run `php artisan view:publish despark/html-template-curator` to publish views
-5. Run `php artisan config:publish despark/html-template-curator` to publish the configuration files
-6. Run `php artisan asset:publish despark/html-template-curator` to publish the assets
+3. Run `php artisan view:publish despark/html-template-curator` to publish views
+4. Run `php artisan config:publish despark/html-template-curator` to publish the configuration files
+5. Run `php artisan asset:publish despark/html-template-curator` to publish the assets
+6. Put your amazing HTML templates (which include the required `eg-editable` on all the editable sections) in a new folder called *templates* in your public directory. (In the */public/packages/despark/html-template-curator/templates/* folder you will find some examples of HTML templates)
 7. In the views where you want to enable the Template Curator functionality you need to have atleast the following two elements.
 
 	A `<select>` field which will load the available templates, so that the user can select the layout, which to edit.
