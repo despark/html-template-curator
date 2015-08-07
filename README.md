@@ -6,7 +6,7 @@ The idea is that when coding your HTML templates you add the `eg-editable` class
 
 ## Genting Started
 1. Add the following dependency to your composer.json's require section:
-	```javascript
+	```
 	"despark/html-template-curator": "1.*"
 	```
 2. Run composer update
