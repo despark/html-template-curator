@@ -2,27 +2,24 @@
 
 // HTML Template Curator Routes
 
-Route::get('load_template_editor_config', function()
-{
-	return Response::json(
+Route::get('load_template_editor_config', function () {
+    return response()->json(
         [
-        	'soundcloudClientId' => Config::get("html-template-curator::soundcloud.client_id"),
+            'soundcloudClientId' => config('html-template-curator.soundcloud.client_id'),
         ]
     );
 });
-Route::get('html_template_curator/load_available_templates', function()
-{
-	return Response::json(
-		[null => '--'] + Config::get('html-template-curator::templates')
-	);
+Route::get('html_template_curator/load_available_templates', function () {
+    return response()->json(
+        [null => '--'] + config('html-template-curator.templates')
+    );
 });
 
-Route::get('html_template_curator/load_template', function()
-{
-	return Response::json(
+Route::get('html_template_curator/load_template', function () {
+    return response()->json(
         [
-	        'html' => file_get_contents(Config::get('html-template-curator::templates_location').Input::get('template').'/index.html'),
-	        'style' => asset('templates/'.Input::get('template').'/style.css'),
+            'html' => file_get_contents(config('html-template-curator.templates_location').$request->input('template').'/index.html'),
+            'style' => asset('templates/'.$request->input('template').'/style.css'),
         ]
     );
 });

@@ -1,9 +1,12 @@
 <?php
+namespace App\Http\Controllers;
 
 use Illuminate\Support\Facades\File;
 use Illuminate\Support\Facades\Input;
+use Illuminate\Http\Request;
 use Despark\Uploader\ImageUploader;
 use Intervention\Image\Facades\Image;
+use App\Http\Controllers\Controller;
 
 class UploadController extends BaseController
 {
@@ -21,7 +24,7 @@ class UploadController extends BaseController
     {
         $this->uploader = $uploader;
 
-        $this->uploadDirectory = public_path().'/'.Config::get('html_template_curator.upload_directory_name').'/';
+        $this->uploadDirectory = public_path().'/'.config('html_template_curator.upload_directory_name').'/';
 
         // Check if uploads folder exists and create if not
         if ( ! File::isDirectory($this->uploadDirectory)) {
@@ -84,7 +87,7 @@ class UploadController extends BaseController
             $resized_image = $path.'resized-'.$filename;
             $this->uploader->image->save($this->uploadDirectory.$resized_image);
 
-            return \Response::json(
+            return response()->json(
                 [
                 'status' => 'success',
                 'html' => $this->view(
@@ -98,7 +101,7 @@ class UploadController extends BaseController
                 ]
             );
         } else {
-            return \Response::json(
+            return response()->json(
                 [
                 'status' => 'error',
                 'msg' => $validator->messages()->first('image'),
@@ -114,9 +117,9 @@ class UploadController extends BaseController
      */
     public function inline_upload()
     {
-        $validator = Validator::make(
+        $validator = $this->validate($request
             array(
-                'image' => Input::file('image'),
+                'image' => $request->file('image'),
             ),
             array(
                 'image' => 'required|image|image_size:>='.Input::get('w').',>='.Input::get('h'),
