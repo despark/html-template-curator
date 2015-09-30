@@ -16,6 +16,7 @@
 </div>
 <script>
     var templateEditorConfig = {
-        baseUrl: '{{ Config::get("app.url") }}'
+        baseUrl: '{{ Config::get("app.url") }}',
+        csrfToken: '{{ csrf_token() }}'
     };
 </script>

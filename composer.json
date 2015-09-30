@@ -1,9 +1,9 @@
 {
     "name": "despark/html-template-curator",
     "description": "Laravel 5.1 package, which enables you to manage complicated HTML templates, preserving the design integrity.",
-	"keywords": ["laravel","rich", "text", "editor", "wysiwyg", "despark"],
-	"license": "MIT",
-	"type": "plugin",
+    "keywords": ["laravel","rich", "text", "editor", "wysiwyg", "despark"],
+    "license": "MIT",
+    "type": "plugin",
     "authors": [
         {
             "name": "Stoyan Dipchikov",
@@ -17,11 +17,12 @@
         "illuminate/database": "5.1.*",
         "intervention/image": "~2",
         "intervention/imagecache": "~2.1",
-        "cviebrock/image-validator": "1.*"
+        "laravelcollective/html": "~5.0",
+        "cviebrock/image-validator": "2.0.*@beta"
     },
     "autoload": {
         "psr-4": {
-            "Despark\\HtmlTemplateCurator\\": "src/"
+            "Despark\\HtmlTemplateCurator\\": "src/Despark/HtmlTemplateCurator/"
         }
     },
     "minimum-stability": "stable"

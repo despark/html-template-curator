@@ -1,6 +1,9 @@
-<?php namespace Despark;
+<?php
 
-class DesparkHelpers {
+namespace Despark\HtmlTemplateCurator;
+
+class DesparkHelpers
+{
     /**
      * UTF8_transliterate_to_ascii.
      *
@@ -9,7 +12,7 @@ class DesparkHelpers {
      * @copyright (c) 2005 Harry Fuecks
      * @license   http://www.gnu.org/licenses/old-licenses/lgpl-2.1.txt
      */
-    static function Utf8TransliterateToAscii($str, $case = 0)
+    public static function Utf8TransliterateToAscii($str, $case = 0)
     {
         static $utf8_lower_accents = null;
         static $utf8_upper_accents = null;
@@ -86,7 +89,7 @@ class DesparkHelpers {
      *
      * @uses   transliterate_to_ascii
      */
-    static function stringToFilename($title, $separator = '-', $ascii_only = false)
+    public static function stringToFilename($title, $separator = '-', $ascii_only = false)
     {
         if ($ascii_only === true) {
             // Transliterate non-ASCII characters
@@ -113,7 +116,7 @@ class DesparkHelpers {
      *
      * @return String
      */
-    static function removeDuplicatedSpaces($string)
+    public static function removeDuplicatedSpaces($string)
     {
         return preg_replace('/\s\s+/', ' ', trim($string));
     }
@@ -128,7 +131,7 @@ class DesparkHelpers {
      *
      * @return Array
      */
-    static function xWeekRange($date)
+    public static function xWeekRange($date)
     {
         $ts = strtotime($date);
         $start = (date('w', $ts) == 1) ? $ts : strtotime('last monday', $ts);

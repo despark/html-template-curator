@@ -16,7 +16,7 @@ class HtmlTemplateCuratorServiceProvider extends ServiceProvider
 
         $this->publishes([
                 __DIR__.'/../../views' => base_path('resources/views/vendor/html-template-curator'),
-            ]);
+            ], 'views');
 
         $this->publishes([
                 __DIR__.'/../../config/html-template-curator.php' => config_path('html-template-curator.php'),
@@ -36,16 +36,10 @@ class HtmlTemplateCuratorServiceProvider extends ServiceProvider
      */
     public function register()
     {
+        $this->app->register('Cviebrock\ImageValidator\ImageValidatorServiceProvider');
+        $this->app->register('Intervention\Image\ImageServiceProvider');
         $this->app->bind('html-template-curator', function ($app) {
             return new HtmlTemplateCurator();
-        });
-
-        $this->app->bind('Cviebrock\ImageValidator\ImageValidatorServiceProvider', function ($app) {
-            return new ImageValidator();
-        });
-
-        $this->app->bind('Intervention\Image\ImageServiceProvider', function ($app) {
-            return new Image();
         });
     }
 
