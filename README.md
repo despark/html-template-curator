@@ -14,11 +14,11 @@ The idea is that when coding your HTML templates you add the `eg-editable` class
 	```php
 	'Despark\HtmlTemplateCurator\HtmlTemplateCuratorServiceProvider::class',
 	```
-3. Run `php artisan vendor:publish --provider="Despark\HtmlTemplateCurator\HtmlTemplateCuratorServiceProvider" --tag="views"` to publish views
-4. Run `php artisan vendor:publish --provider="Despark\HtmlTemplateCurator\HtmlTemplateCuratorServiceProvider" --tag="config"` to publish the configuration files
-5. Run `php artisan vendor:publish --provider="Despark\HtmlTemplateCurator\HtmlTemplateCuratorServiceProvider" --tag="public"` to publish the assets
-6. Put your amazing HTML templates (which include the required `eg-editable` on all the editable sections) in a new folder called *templates* in your public directory. (In the */public/packages/despark/html-template-curator/templates/* folder you will find some examples of HTML templates)
-7. In the views where you want to enable the Template Curator functionality you need to have atleast the following two elements.
+4. Run `php artisan vendor:publish --provider="Despark\HtmlTemplateCurator\HtmlTemplateCuratorServiceProvider" --tag="views"` to publish views
+5. Run `php artisan vendor:publish --provider="Despark\HtmlTemplateCurator\HtmlTemplateCuratorServiceProvider" --tag="config"` to publish the configuration files
+6. Run `php artisan vendor:publish --provider="Despark\HtmlTemplateCurator\HtmlTemplateCuratorServiceProvider" --tag="public"` to publish the assets
+7. Put your amazing HTML templates (which include the required `eg-editable` on all the editable sections) in a new folder called *templates* in your public directory. (In the */public/packages/despark/html-template-curator/templates/* folder you will find some examples of HTML templates)
+8. In the views where you want to enable the Template Curator functionality you need to have atleast the following two elements.
 
 	A `<select>` field which will load the available templates, so that the user can select the layout, which to edit.
 	**E.g.**
@@ -31,7 +31,7 @@ The idea is that when coding your HTML templates you add the `eg-editable` class
 	```php
 	{{ Form::textarea('content', null, ['id' => 'content']) }}
 	```
-8. In the view which will hold the editor after the definition of the elements above add the following code:
+9. In the view which will hold the editor after the definition of the elements above add the following code:
 	```php
 	@include('packages.despark.html-template-curator.partials.modal_editor_definition') {{-- Includes the modal popup --}}
 	@include('packages.despark.html-template-curator.partials.script') {{-- The needed JavaScript files for the HTML Template Curator --}}
@@ -45,10 +45,10 @@ The idea is that when coding your HTML templates you add the `eg-editable` class
 	</script>
 	```
 You can uncoment `{{-- <script src="{{ asset('vendor/html-template-curator/js/vendor/jquery/dist/jquery.min.js') }}"></script> --}}` if you don't already have jQuery required somewhre in your code.
-9. Add the available templates in the following config: * config/html-template-curator.php* under the `templates` key of the config array. As key for each element of the array put the name of the folder in which the template is stored  and as a value put the display name you want to appear in the select field.
-10. Make sure you have set the proper app URL in the * config/app.php* file
-11. After you are done navigate the page you just created and start editing your templates.
+10. Add the available templates in the following config: * config/html-template-curator.php* under the `templates` key of the config array. As key for each element of the array put the name of the folder in which the template is stored  and as a value put the display name you want to appear in the select field.
+11. Make sure you have set the proper app URL in the * config/app.php* file
+12. After you are done navigate the page you just created and start editing your templates.
 
 In the package views you will find a folder called **examples**, which contains sample implementations of the editor.
 
-* P.S.: Keep in mind that this is still work in progress, so there might some small issues for resolving, but I count on you and your great pull-requests to make it a great plugin*
+*P.S.: Keep in mind that this is still work in progress, so there might some small issues for resolving, but I count on you and your great pull-requests to make it a great plugin*
