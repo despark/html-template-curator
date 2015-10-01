@@ -1,40 +1,46 @@
-<?php namespace Despark\HtmlTemplateCurator;
+<?php
+
+namespace Despark\HtmlTemplateCurator;
 
 use Illuminate\Support\ServiceProvider;
 use App;
 
-class HtmlTemplateCuratorServiceProvider extends ServiceProvider {
-
-    /**
-     * Indicates if loading of the provider is deferred.
-     *
-     * @var bool
-     */
-    protected $defer = false;
-
+class HtmlTemplateCuratorServiceProvider extends ServiceProvider
+{
     /**
      * Bootstrap the application events.
-     *
-     * @return void
      */
     public function boot()
     {
-        $this->package('despark/html-template-curator');
+        $this->loadViewsFrom(__DIR__.'/../../views', 'html-template-curator');
 
-        require __DIR__.'/../../routes.php';
+        $this->publishes([
+                __DIR__.'/../../views' => base_path('resources/views/vendor/html-template-curator'),
+            ], 'views');
 
-        App::register('Cviebrock\ImageValidator\ImageValidatorServiceProvider');
-        App::register('Intervention\Image\ImageServiceProvider');
+        $this->publishes([
+                __DIR__.'/../../config/html-template-curator.php' => config_path('html-template-curator.php'),
+            ], 'config');
+
+        $this->publishes([
+                __DIR__.'/../../../public' => public_path('vendor/html-template-curator'),
+            ], 'public');
+
+        if (! $this->app->routesAreCached()) {
+            require __DIR__.'/../../routes.php';
+        }
     }
 
     /**
      * Register the service provider.
-     *
-     * @return void
      */
     public function register()
     {
-        //
+        $this->app->register('Cviebrock\ImageValidator\ImageValidatorServiceProvider');
+        $this->app->register('Intervention\Image\ImageServiceProvider');
+        $this->app->bind('html-template-curator', function ($app) {
+            return new HtmlTemplateCurator();
+        });
     }
 
     /**
@@ -46,5 +52,4 @@ class HtmlTemplateCuratorServiceProvider extends ServiceProvider {
     {
         return array();
     }
-
 }

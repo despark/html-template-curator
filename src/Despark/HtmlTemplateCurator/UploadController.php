@@ -1,8 +1,14 @@
 <?php
 
+namespace Despark\HtmlTemplateCurator;
+
+use Despark\HtmlTemplateCurator\Uploader\ImageUploader;
 use Illuminate\Support\Facades\File;
 use Illuminate\Support\Facades\Input;
-use Despark\Uploader\ImageUploader;
+use Illuminate\Http\Request;
+use Illuminate\Http\Response;
+use Illuminate\Routing\Controller as BaseController;
+use Validator;
 use Intervention\Image\Facades\Image;
 
 class UploadController extends BaseController
@@ -21,15 +27,15 @@ class UploadController extends BaseController
     {
         $this->uploader = $uploader;
 
-        $this->uploadDirectory = public_path().'/'.Config::get('html_template_curator.upload_directory_name').'/';
+        $this->uploadDirectory = public_path().'/'.config('html_template_curator.upload_directory_name').'/';
 
         // Check if uploads folder exists and create if not
-        if ( ! File::isDirectory($this->uploadDirectory)) {
+        if (! File::isDirectory($this->uploadDirectory)) {
             File::makeDirectory($this->uploadDirectory, 0755, true, true);
         }
 
         // Check if folder for storing images and temp dir exists and create if not
-        if ( ! File::isDirectory($this->uploadDirectory.'images/temp/')) {
+        if (! File::isDirectory($this->uploadDirectory.'images/temp/')) {
             File::makeDirectory($this->uploadDirectory.'images/temp/', 0755, true, true);
         }
     }
@@ -39,15 +45,12 @@ class UploadController extends BaseController
      *
      * @return Response
      */
-    public function store()
+    public function store(Request $request)
     {
-        $validator = \Validator::make(
-            array(
-                'image' => \Input::file('image'),
-            ),
-            array(
+        $validator = Validator::make($request->all(),
+            [
                 'image' => 'required|image|image_size:>=720,>=480',
-            )
+            ]
         );
 
         if ($validator->passes()) {
@@ -84,7 +87,7 @@ class UploadController extends BaseController
             $resized_image = $path.'resized-'.$filename;
             $this->uploader->image->save($this->uploadDirectory.$resized_image);
 
-            return \Response::json(
+            return response()->json(
                 [
                 'status' => 'success',
                 'html' => $this->view(
@@ -98,7 +101,7 @@ class UploadController extends BaseController
                 ]
             );
         } else {
-            return \Response::json(
+            return response()->json(
                 [
                 'status' => 'error',
                 'msg' => $validator->messages()->first('image'),
@@ -112,15 +115,12 @@ class UploadController extends BaseController
      *
      * @return Response
      */
-    public function inline_upload()
+    public function inline_upload(Request $request)
     {
-        $validator = Validator::make(
-            array(
-                'image' => Input::file('image'),
-            ),
-            array(
-                'image' => 'required|image|image_size:>='.Input::get('w').',>='.Input::get('h'),
-            )
+        $validator = Validator::make($request->all(),
+            [
+                'image' => 'required|image|image_size:>='.$request->input('w').',>='.$request->input('h'),
+            ]
         );
 
         if ($validator->passes()) {
@@ -154,10 +154,10 @@ class UploadController extends BaseController
 
             $this->uploader->image->save($this->uploadDirectory.$image);
 
-            return \Response::json(
+            return response()->json(
                 [
                 'status' => 'success',
-                'html' => '<img id="inlineImage" src="'.asset(Config::get('html_template_curator.upload_directory_name').'/'.$image).'" data-filename="'.$filename.'" />'
+                'html' => '<img id="inlineImage" src="'.asset(config('html_template_curator.upload_directory_name').'/'.$image).'" data-filename="'.$filename.'" />'
                     .'<input type="hidden" id="_x1" value="" />'
                     .'<input type="hidden" id="_y1" value="" />'
                     .'<input type="hidden" id="_x2" value="" />'
@@ -167,7 +167,7 @@ class UploadController extends BaseController
                 ]
             );
         } else {
-            return \Response::json(
+            return response()->json(
                 [
                 'status' => 'error',
                 'msg' => $validator->messages()->first('image'),
@@ -181,9 +181,9 @@ class UploadController extends BaseController
      *
      * @return Response
      */
-    public function inline_crop()
+    public function inline_crop(Request $request)
     {
-        $data = \Input::all();
+        $data = $request->all();
 
         File::makeDirectory($this->uploadDirectory.'images/articles/inline_images/', 0755, true, true);
 
@@ -200,9 +200,9 @@ class UploadController extends BaseController
         $img->save($this->uploadDirectory.'images/articles/inline_images/'.$data['filename']);
 
         $data['image_title'] = array_get($data, 'image_caption', 'image').(array_get($data, 'author_caption', '') !== '' ? ' by '.$data['author_caption'] : '');
-        $data['full_path'] = asset(Config::get('html_template_curator.upload_directory_name').'/'.'images/articles/inline_images/'.$data['filename']);
+        $data['full_path'] = asset(config('html_template_curator.upload_directory_name').'/'.'images/articles/inline_images/'.$data['filename']);
 
-        $imageHtml = View::make('html-template-curator::partials.inline_image', array('data' => $data))->render();
+        $imageHtml = view('html-template-curator::partials.inline_image', array('data' => $data))->render();
 
         return json_encode([
             'image' => $imageHtml,
