@@ -9,6 +9,7 @@ The idea is that when coding your HTML templates you add the `eg-editable` class
 	```
 	"despark/html-template-curator": "2.*"
 	```
+
 In order to use the plugin you need to set composer's `minimum-stability` to **beta**, because we are using *cviebrock/image-validator* in beta release, since stable is still not provided for Laravel 5.
 2. Run composer update
 3. Add the HTML template curator's service provider in * config/app.php*
