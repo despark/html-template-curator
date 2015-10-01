@@ -1,5 +1,5 @@
 # Laravel HTML Template Curator
-Laravel 5 package, which enables you to manage complicated HTML templates, preserving the design integrity.
+Laravel 5 package, which enables you to manage complicated HTML templates, preserving the design integrity. (if you want to use this plugin with Laravel 4 please require the *v1.0.2* )
 
 The purpose of this package is to help you implement rich text editing for complicated HTML views, but remove the risk of breaking the beautiful designs, which your talanted designers produced.
 The idea is that when coding your HTML templates you add the `eg-editable` class to all the elements, which you want to enable for editing through the HTML Template Curator and the curator automatically injects inline editors for them only when initialised.
@@ -9,6 +9,7 @@ The idea is that when coding your HTML templates you add the `eg-editable` class
 	```
 	"despark/html-template-curator": "2.*"
 	```
+In order to use the plugin you need to set composer's `minimum-stability` to **beta**, because we are using *cviebrock/image-validator* in beta release, since stable is still not provided for Laravel 5.
 2. Run composer update
 3. Add the HTML template curator's service provider in * config/app.php*
 	```php
