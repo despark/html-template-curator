@@ -294,7 +294,7 @@
                                 type: 'post',
                                 dataType: 'json',
                                 success: function(response) {
-                                    self.html(response.image);
+                                    self.children('img').replaceWith(response.image);
                                     self.children('figcaption').text($('#image-caption').val());
                                     self.children('.photo-author').text($('#author-caption').val());
                                     $('#redactorDialog').modal('hide');
