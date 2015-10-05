@@ -122,12 +122,15 @@
 
                 if (img.length) {
 
+                    imgTitle = $("figcaption:not('.photo-author')", self);
+                    imgAuthor = $("figcaption.photo-author", self);
+
                     var html =
                         '<div class="form-group">'+
                             '<label for="caption">Image title:</label>'+
-                            '<input id="image-caption" class="form-control" name="caption" type="text" />'+
+                            '<input id="image-caption" class="form-control" name="caption" type="text" value="'+(imgTitle.length ? imgTitle.text() : '')+'" />'+
                             '<label for="author">Image author:</label>'+
-                            '<input id="author-caption" class="form-control" name="author_caption" type="text" />'+
+                            '<input id="author-caption" class="form-control" name="author_caption" type="text" value="'+(imgAuthor.length ? imgAuthor.text() : '')+'" />'+
                             '<label for="image">Image:</label>'+
                             '<input id="inline-uploader" class="form-control" name="image" type="file" />'+
                             '<div id="inlineImageContainer" style="position: relative;"></div>'+
