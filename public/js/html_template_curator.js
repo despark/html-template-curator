@@ -57,6 +57,20 @@
                 $.each(response, function (i, v) {
                     self.append('<option value="' + i + '" ' + (i == selectedTemplate ? 'selected="selected"' : '') + '>' + v + '</option>');
                 });
+
+                if (selectedTemplate) {
+                    $.ajax({
+                        url: templateEditorConfig.baseUrl + '/html_template_curator/load_template_style',
+                        data: {
+                            template: selectedTemplate
+                        },
+                        type: 'get',
+                        dataType: 'json',
+                        success: function(response) {
+                            templateEditorConfig.loadArticleStyle(response.style);
+                        }
+                    });
+                }
             }
         });
 
@@ -82,6 +96,8 @@
                 dataType: 'json',
                 success: function(response) {
                     $('#' + templateEditorConfig.idForHtmlTemplateContainer ).html(response.html);
+                    $(templateContentSelector).val(response.html);
+
                     templateEditorConfig.loadArticleStyle(response.style);
                 }
             });

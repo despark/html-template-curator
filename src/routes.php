@@ -25,6 +25,14 @@ Route::get('html_template_curator/load_template', function (Request $request) {
     );
 });
 
+Route::get('html_template_curator/load_template_style', function (Request $request) {
+    return response()->json(
+        [
+            'style' => asset('templates/'.$request->input('template').'/style.css'),
+        ]
+    );
+});
+
 // uploads
 Route::put('html_template_curator/upload', 'Despark\HtmlTemplateCurator\UploadController@store');
 Route::post('html_template_curator/upload', 'Despark\HtmlTemplateCurator\UploadController@store');
