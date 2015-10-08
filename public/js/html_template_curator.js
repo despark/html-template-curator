@@ -289,6 +289,8 @@
                             });
                         }
 
+                        $('div.edit-toolbar').remove();
+
                         hiddenInputForContent.val($('#' + templateEditorConfig.idForHtmlTemplateContainer ).html());
                     })
 
