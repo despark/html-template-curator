@@ -413,6 +413,8 @@
                 else {
                     self.text('Cancel');
                 }
+
+                hiddenInputForContent.val($('#' + templateEditorConfig.idForHtmlTemplateContainer ).html());
             });
     };
 }(jQuery));
