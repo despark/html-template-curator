@@ -167,6 +167,8 @@
                                         $('#inline-uploader').siblings('.text-danger').remove();
 
                                         if (response.result.status == 'success') {
+                                            $('.js-update-content').prop('disabled', false);
+
                                             $('#inlineImageContainer').html(response.result.html);
                                             $('.modal-dialog').css({
                                                 width: (40 + response.result.image_width)+'px'
@@ -206,6 +208,7 @@
                                         }
                                         else {
                                             $('#inline-uploader').after('<div class="text-danger">'+response.result.msg+'</div>');
+                                            $('.js-update-content').prop('disabled', true);
                                         }
                                     }
                                 })
