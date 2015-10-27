@@ -408,7 +408,7 @@
                                 content = $('<div/>').html($('#redactor').val()),
                                 elemetnTag= self.prop("tagName").toLowerCase();
 
-                            $.each($(elemetnTag, content), function(i, item) {
+                            $.each($('>*', content), function(i, item) {
                                 var obj = $(item);
                                 obj.attr('class', classAttr);
                                 newContent.push(obj.outerHTML());
