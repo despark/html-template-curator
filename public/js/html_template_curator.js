@@ -299,63 +299,34 @@
 
                     .off('click', '.js-update-content')
                     .on('click', '.js-update-content', function(e) {
-                        if (img.length) {
-                            if (imgArea) {
-                                $.ajax({
-                                    url: templateEditorConfig.baseUrl + '/html_template_curator/inline_crop',
-                                    data: {
-                                        x1: $('#_x1').val(),
-                                        y1: $('#_y1').val(),
-                                        x2: $('#_x2').val(),
-                                        y2: $('#_y2').val(),
-                                        url: $('#inputUrl').val(),
-                                        filename: $('#inlineImage').data('filename'),
-                                        width: img.width(),
-                                        height: img.height(),
-                                        author_caption: $('#author-caption').val(),
-                                        image_caption: $('#image-caption').val(),
-                                        _token: templateEditorConfig.csrfToken
-                                    },
-                                    type: 'post',
-                                    dataType: 'json',
-                                    success: function(response) {
-                                        self.children('img').replaceWith(response.image);
-                                        self.children('figcaption').text($('#image-caption').val());
-                                        self.children('.photo-author').text($('#author-caption').val());
-                                        $('#redactorDialog').modal('hide');
-                                    },
-                                    error: function (request, status, error) {
-                                        $('#inlineImageContainer').after('<div class="text-danger">'+request.responseText+'</div>');
-                                    }
-                                });
-                            }
-                            else if ($('#image-caption').val() || $('#author-caption').val() || $('#inputUrl').val()) {
-                                var titleText = '';
-
-                                if ($('#image-caption').val()) {
+                        if (imgArea) {
+                            $.ajax({
+                                url: templateEditorConfig.baseUrl + '/html_template_curator/inline_crop',
+                                data: {
+                                    x1: $('#_x1').val(),
+                                    y1: $('#_y1').val(),
+                                    x2: $('#_x2').val(),
+                                    y2: $('#_y2').val(),
+                                    url: $('#inputUrl').val(),
+                                    filename: $('#inlineImage').data('filename'),
+                                    width: img.width(),
+                                    height: img.height(),
+                                    author_caption: $('#author-caption').val(),
+                                    image_caption: $('#image-caption').val(),
+                                    _token: templateEditorConfig.csrfToken
+                                },
+                                type: 'post',
+                                dataType: 'json',
+                                success: function(response) {
+                                    self.children('img').replaceWith(response.image);
                                     self.children('figcaption').text($('#image-caption').val());
-                                    titleText = $('#image-caption').val();
-                                }
-
-                                if ($('#author-caption').val()) {
                                     self.children('.photo-author').text($('#author-caption').val());
-
-                                    titleText += (titleText.trim() != '' ? '' : 'Image') + ' by ' + $('#author-caption').val();
+                                    $('#redactorDialog').modal('hide');
+                                },
+                                error: function (request, status, error) {
+                                    $('#inlineImageContainer').after('<div class="text-danger">'+request.responseText+'</div>');
                                 }
-
-                                if (titleText.trim() != '') {
-                                    self
-                                        .children('img')
-                                        .prop('title', titleText)
-                                        .prop('alt', titleText);
-                                }
-
-                                if ($('#inputUrl').val()) {
-                                    self.children('a').prop('href', $('#inputUrl').val());
-                                }
-
-                                $('#redactorDialog').modal('hide');
-                            }
+                            });
                         }
                         else if (soundcloud.length) {
                             var url = $($('#redactor').val()).html();
@@ -408,7 +379,7 @@
                                 content = $('<div/>').html($('#redactor').val()),
                                 elemetnTag= self.prop("tagName").toLowerCase();
 
-                            $.each($('>*', content), function(i, item) {
+                            $.each($(elemetnTag, content), function(i, item) {
                                 var obj = $(item);
                                 obj.attr('class', classAttr);
                                 newContent.push(obj.outerHTML());
