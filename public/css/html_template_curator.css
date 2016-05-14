@@ -30,3 +30,8 @@
 #template-editor-html-content div.slider::before {
     content: "Slider";
 }
+@media (min-width: 690px) {
+    .modal-content {
+        width: 625px;
+    }
+}
