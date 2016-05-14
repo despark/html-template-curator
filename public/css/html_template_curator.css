@@ -32,6 +32,6 @@
 }
 @media (min-width: 690px) {
     .modal-content {
-        width: 625px;
+        min-width: 625px;
     }
 }
