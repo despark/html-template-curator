@@ -6,6 +6,7 @@ use Illuminate\Support\Facades\File;
 use Illuminate\Support\Facades\Input;
 use Intervention\Image\Facades\Image;
 use Despark\HtmlTemplateCurator\DesparkHelpers;
+use Imagick;
 
 class ImageUploader
 {
@@ -76,9 +77,13 @@ class ImageUploader
                 '',
                 Input::file($file)->getClientOriginalName()
             )
-        )
-            .$this->getExt();
-        $this->image = Image::make(Input::file($file)->getRealPath());
+        ).$this->getExt();
+
+        if (strtolower(Input::file($file)->getClientOriginalExtension()) === 'gif') {
+            $this->image = new Imagick(Input::file($file)->getRealPath());
+        } else {
+            $this->image = Image::make(Input::file($file)->getRealPath());
+        }
 
         return $this;
     }

@@ -504,7 +504,6 @@
 
                                 if ($('#author-caption').val()) {
                                     self.children('.photo-author').text($('#author-caption').val());
-
                                     titleText += (titleText.trim() != '' ? '' : 'Image') + ' by ' + $('#author-caption').val();
                                 }
 
