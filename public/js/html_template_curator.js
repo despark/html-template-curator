@@ -461,7 +461,6 @@
                     })
                     .off('click', '.js-update-content')
                     .on('click', '.js-update-content', function (e) {
-                        tinymce.activeEditor.save();
                         if (img.length) {
                             if (imgArea) {
                                 var imgFilename = $('#inlineImageContainer #inlineImage').data('filename');
@@ -615,6 +614,7 @@
                             $('#redactorDialog').modal('hide');
                             $('.add-toolbar').remove();
                         } else {
+                            tinymce.activeEditor.save();
                             var newContent = [],
                                 classAttr = self.attr('class'),
                                 content = $('<div/>').html($('#redactor').val()),
