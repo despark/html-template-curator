@@ -1,17 +1,37 @@
+.add-toolbar {
+    position: absolute;
+    top     : -34px;
+    left    : 445px;
+}
+.add-element {
+    padding-top: 34px;
+}
 .edit-toolbar {
-	position: absolute;
+    position: absolute;
 }
 .eg-editable {
-	position: relative;
+    position: relative;
 }
 .js-cancelled {
-	opacity: .2;
+    opacity: 0.2;
 }
 .js-cancelled .js-cancel {
-	opacity: 1 !important;
+    opacity: 1 !important;
 }
 .js-delete-toolbar {
-	position: absolute;
-	top: 15px;
-	left: -35px;
+    position: absolute;
+    top     : 15px;
+    left    : -35px;
+}
+#template-editor-html-content div.slider {
+    border: 1px dashed #c0c0c0;
+    height: 90px;
+}
+#template-editor-html-content div.slider::before {
+    content: "Slider";
+}
+@media (min-width: 690px) {
+    .modal-content {
+        min-width: 625px;
+    }
 }
